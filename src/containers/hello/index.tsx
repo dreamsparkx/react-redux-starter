@@ -1,6 +1,6 @@
 import React, { useReducer, Dispatch as DispatchType } from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from "redux";
 import { State as RootState } from '../../reducers';
 import { RouterState } from 'connected-react-router';
