@@ -7,3 +7,6 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
+
+//https://medium.com/@antonybudianto/react-router-testing-with-jest-and-enzyme-17294fefd303
+//https://medium.com/better-programming/how-to-setup-continuous-integration-ci-with-react-circleci-and-github-e0efd5040b03
