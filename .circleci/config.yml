@@ -5,6 +5,9 @@ workflows:
   push:
     jobs:
       - react/install
+      - react/build:
+          requires:
+            - react/install
       - react/eslint:
           requires:
             - react/install
