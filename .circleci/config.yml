@@ -1,16 +1,14 @@
 orbs:
-  react: thefrontside/react@0.2.0
+  node: circleci/node@2.0.2
+
 version: 2.1
+
 workflows:
-  push:
+  matrix-tests:
     jobs:
-      - react/install
-      - react/eslint:
-          requires:
-            - react/install
-      - react/test:
-          requires:
-            - react/install
-      - react/coverage:
-          requires:
-            - react/install
+      - node/test:
+          version: 13.11.0
+      - node/test:
+          version: 12.16.0
+      - node/test:
+          version: 10.19.0
