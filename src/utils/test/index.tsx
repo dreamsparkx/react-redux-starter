@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
 import { createLocation, createMemoryHistory } from 'history';
 import { match as routerMatch , Router} from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import { render as rtlRender } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore, { history } from '../../configureStore';
@@ -19,9 +20,9 @@ function render(ui: React.ReactElement, renderOptions: RenderOptions) {
     const store = configureStore(initialState);
     function Wrapper( { children }: { children?: ReactNode } ) {
         return <Provider store={store}>
-            <Router history={history}>
+            <ConnectedRouter history={history}>
                 {children}
-            </Router>
+            </ConnectedRouter>
         </Provider>;
     }
     return rtlRender(ui, { wrapper: Wrapper, ...renderOptions.renderOptions });
