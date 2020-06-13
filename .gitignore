@@ -13,7 +13,6 @@
 
 # storybook
 storybook-static
-*__snapshots__
 
 # Editors
 .idea
