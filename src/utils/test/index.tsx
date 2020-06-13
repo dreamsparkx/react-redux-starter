@@ -20,9 +20,7 @@ function render(ui: React.ReactElement, renderOptions: RenderOptions) {
     const store = configureStore(initialState);
     function Wrapper( { children }: { children?: ReactNode } ) {
         return <Provider store={store}>
-            <ConnectedRouter history={history}>
-                {children}
-            </ConnectedRouter>
+            {children}
         </Provider>;
     }
     return rtlRender(ui, { wrapper: Wrapper, ...renderOptions.renderOptions });
