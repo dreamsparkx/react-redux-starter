@@ -36,13 +36,13 @@ function Hello(props: Props){
     return(
         <>
             <h1>Hook state</h1>
-            <span>count: {count}</span>
-            <button onClick={() => {dispatchState({ type: 'increment' })}}>+</button>
-            <button onClick={() => {dispatchState({ type: 'decrement' })}}>-</button>
+            <span data-testid={'hook-state'}>count: {count}</span>
+            <button data-testid={'hook-state-increment-btn'} onClick={() => {dispatchState({ type: 'increment' })}}>+</button>
+            <button data-testid={'hook-state-decrement-btn'} onClick={() => {dispatchState({ type: 'decrement' })}}>-</button>
             <h1>Redux State</h1>
-            <span>count: {counter}</span>
-            <button onClick={() => {props.actions.changeCounter(HelloActionType.increment)}}>+</button>
-            <button onClick={() => {props.actions.changeCounter(HelloActionType.decrement)}}>-</button>
+            <span data-testid={'redux-state'}>count: {counter}</span>
+            <button data-testid={'redux-state-increment-btn'} onClick={() => {props.actions.changeCounter(HelloActionType.increment)}}>+</button>
+            <button data-testid={'redux-state-decrement-btn'} onClick={() => {props.actions.changeCounter(HelloActionType.decrement)}}>-</button>
         </>
     );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
 import configureStore, { history } from './configureStore';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -11,9 +11,9 @@ const store = configureStore();
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}> { /* place ConnectedRouter under Provider */ }
+        <Router history={history}> { /* place ConnectedRouter under Provider */ }
             <Routes/>
-        </ConnectedRouter>
+        </Router>
     </Provider>,
     document.getElementById('root')
 );
