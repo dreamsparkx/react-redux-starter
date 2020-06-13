@@ -1,10 +1,10 @@
 import React, {ReactNode} from 'react';
-import { createLocation, createMemoryHistory } from 'history';
-import { match as routerMatch , Router} from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
+import { createMemoryHistory, parsePath } from 'history';
+import resolvePathname from 'resolve-pathname';
+import { match as routerMatch} from 'react-router-dom';
 import { render as rtlRender } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import configureStore, { history } from '../../configureStore';
+import configureStore from '../../configureStore';
 import { State as RootState } from '../../reducers';
 import reducerInitialState from '../../reducers/initialStates';
 
@@ -62,3 +62,69 @@ const generateUrl = <Params extends MatchParameter<Params>>
 export * from '@testing-library/react';
 
 export { render };
+
+function createLocation(path: any, state?: any, key?: any, currentLocation?: any) {
+    let location: any;
+    if (typeof path === 'string') {
+        // Two-arg form: push(path, state)
+        location = parsePath(path);
+        location.state = state;
+    } else {
+        // One-arg form: push(location)
+        location = { ...path };
+
+        if (location.pathname === undefined) location.pathname = '';
+
+        if (location.search) {
+            if (location.search.charAt(0) !== '?')
+                location.search = '?' + location.search;
+        } else {
+            location.search = '';
+        }
+
+        if (location.hash) {
+            if (location.hash.charAt(0) !== '#') location.hash = '#' + location.hash;
+        } else {
+            location.hash = '';
+        }
+
+        if (state !== undefined && location.state === undefined)
+            location.state = state;
+    }
+
+    try {
+        location.pathname = decodeURI(location.pathname);
+    } catch (e) {
+        if (e instanceof URIError) {
+            throw new URIError(
+                'Pathname "' +
+                location.pathname +
+                '" could not be decoded. ' +
+                'This is likely caused by an invalid percent-encoding.'
+            );
+        } else {
+            throw e;
+        }
+    }
+
+    if (key) location.key = key;
+
+    if (currentLocation) {
+        // Resolve incomplete/relative pathname relative to current location.
+        if (!location.pathname) {
+            location.pathname = currentLocation.pathname;
+        } else if (location.pathname.charAt(0) !== '/') {
+            location.pathname = resolvePathname(
+                location.pathname,
+                currentLocation.pathname
+            );
+        }
+    } else {
+        // When there is no prior location and pathname is empty, set it to /
+        if (!location.pathname) {
+            location.pathname = '/';
+        }
+    }
+
+    return location;
+}

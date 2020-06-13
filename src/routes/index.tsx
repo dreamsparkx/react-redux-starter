@@ -6,7 +6,13 @@ export default function Routes(){
     return(
         <Switch>
             <Route exact path="/" component={Hello} />
-            <Route render={() => (<div>Miss</div>)} />
+            <Route component={Test} />
         </Switch>
+    );
+}
+
+function Test(){
+    return (
+        <div>Miss</div>
     );
 }
