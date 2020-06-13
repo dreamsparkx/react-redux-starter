@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from "redux";
 import { State as RootState } from '../../reducers';
-import { RouterState } from 'connected-react-router';
 import { State, Action } from '../../types/containers/hello';
 import { changeCounter } from '../../actions/helloActions';
 import { HelloState, ActionType as HelloActionType } from '../../types/store/hello';
@@ -52,14 +51,12 @@ interface ReduxActions {
 }
 
 interface Props extends RouteComponentProps{
-    router: RouterState;
     hello: HelloState;
     actions: ReduxActions;
 }
 
 function mapStateToProps(state: RootState){
     return {
-        router: state.router,
         hello: state.hello
     };
 }

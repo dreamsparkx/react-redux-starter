@@ -1,6 +1,6 @@
 # react-redux-starter
 
-[![Dependency Status](https://david-dm.org/dreamsparkx/react-redux-starter.svg)](https://david-dm.org/dreamsparkx/react-redux-starter)
+[![Dependency Status](https://david-dm.org/dreamsparkx/react-redux-starter.svg)](https://david-dm.org/dreamsparkx/react-redux-starter) [![CircleCI](https://circleci.com/gh/dreamsparkx/react-redux-starter.svg?style=svg)](https://circleci.com/gh/dreamsparkx/react-redux-starter)
 
 The main purpose of this repository is to show a working React app in TypeScript.
 
