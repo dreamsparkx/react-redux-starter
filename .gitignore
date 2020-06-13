@@ -11,6 +11,10 @@
 # production
 /build
 
+# storybook
+storybook-static
+*__snapshots__
+
 # Editors
 .idea
 *.iml
