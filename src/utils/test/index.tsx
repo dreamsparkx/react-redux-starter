@@ -4,6 +4,7 @@ import resolvePathname from 'resolve-pathname';
 import { match as routerMatch} from 'react-router-dom';
 import { render as rtlRender } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import ThemeProvider from '../../theme/ThemeProvider';
 import configureStore from '../../configureStore';
 import { State as RootState } from '../../reducers';
 import reducerInitialState from '../../reducers/initialStates';
@@ -20,7 +21,9 @@ function render(ui: React.ReactElement, renderOptions: RenderOptions) {
     const store = configureStore(initialState);
     function Wrapper( { children }: { children?: ReactNode } ) {
         return <Provider store={store}>
-            {children}
+            <ThemeProvider>
+                {children}
+            </ThemeProvider>
         </Provider>;
     }
     return rtlRender(ui, { wrapper: Wrapper, ...renderOptions.renderOptions });

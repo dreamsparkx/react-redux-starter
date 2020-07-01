@@ -6,14 +6,17 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Routes from './routes';
 import { BrowserRouter } from 'react-router-dom';
+import ThemeProvider from './theme/ThemeProvider';
 
 const store = configureStore();
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter > { /* place ConnectedRouter under Provider */ }
-            <Routes/>
-        </BrowserRouter>
+        <ThemeProvider>
+            <BrowserRouter > { /* place ConnectedRouter under Provider */ }
+                <Routes/>
+            </BrowserRouter>
+        </ThemeProvider>
     </Provider>,
     document.getElementById('root')
 );

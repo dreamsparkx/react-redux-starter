@@ -1,4 +1,4 @@
-import React, { useReducer, Dispatch as DispatchType } from 'react';
+import React, { useReducer, Dispatch as DispatchType, useContext } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from "redux";
@@ -7,6 +7,7 @@ import { State, Action } from '../../types/containers/hello';
 import { changeCounter } from '../../actions/helloActions';
 import { HelloState, ActionType as HelloActionType } from '../../types/store/hello';
 import Button from '../../components/Button';
+import { ThemeContext } from '../../theme/ThemeProvider';
 
 /**
  * @tutorial https://blog.bitsrc.io/writing-your-own-custom-hooks-4fbcf77e112e
@@ -31,6 +32,7 @@ function hookReducer(state: State, action: Action): State{
 
 function Hello(props: Props){
     const [ internalState, dispatchState ]: [State, DispatchType<Action>] = useReducer(hookReducer, initialState);
+    const { toggleTheme } = useContext(ThemeContext);
     const { count } = internalState;
     const { hello: { counter } } = props;
     return(
@@ -43,6 +45,7 @@ function Hello(props: Props){
             <span data-testid={'redux-state'}>count: {counter}</span>
             <Button text={'+'} data-testid={'redux-state-increment-btn'} onClick={() => {props.actions.changeCounter(HelloActionType.increment)}}/>
             <Button text={'-'} data-testid={'redux-state-decrement-btn'} onClick={() => {props.actions.changeCounter(HelloActionType.decrement)}}/>
+            <br/><Button text={'change theme'} onClick={toggleTheme}/>
         </>
     );
 }
