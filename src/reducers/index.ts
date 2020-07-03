@@ -2,12 +2,13 @@ import { combineReducers } from 'redux';
 import { HelloState } from '../types/store/hello';
 import { helloReducer } from './hello';
 
-const rootReducer = ()=> combineReducers({
-    hello: helloReducer
-});
+const rootReducer = () =>
+  combineReducers({
+    hello: helloReducer,
+  });
 
 export interface State {
-    hello: HelloState;
+  hello: HelloState;
 }
 
-export default rootReducer
+export default rootReducer;
