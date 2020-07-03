@@ -12,7 +12,7 @@ export default function configureStore(preLoadedState?: Partial<RootState>) {
                 thunk,
                 // ... other middlewares ...
             ),
-            composeWithDevTools({ trace: true })()
+            composeWithDevTools({ trace: true })(),
         ),
     );
 }

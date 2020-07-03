@@ -1,7 +1,7 @@
 import React, { useReducer, Dispatch as DispatchType, useContext } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
-import { bindActionCreators, Dispatch } from "redux";
+import { bindActionCreators, Dispatch } from 'redux';
 import { State as RootState } from '../../reducers';
 import { State, Action } from '../../types/containers/hello';
 import { changeCounter } from '../../actions/helloActions';
@@ -15,37 +15,64 @@ import { ThemeContext } from '../../theme/ThemeProvider';
 
 const initialState: State = { count: 0 };
 
-function hookReducer(state: State, action: Action): State{
+function hookReducer(state: State, action: Action): State {
     switch (action.type) {
         case 'increment':
             return {
-                count: state.count + 1
+                count: state.count + 1,
             };
         case 'decrement':
             return {
-                count: state.count - 1
+                count: state.count - 1,
             };
         default:
             throw new Error();
     }
 }
 
-function Hello(props: Props){
-    const [ internalState, dispatchState ]: [State, DispatchType<Action>] = useReducer(hookReducer, initialState);
+function Hello(props: Props) {
+    const [internalState, dispatchState]: [State, DispatchType<Action>] = useReducer(hookReducer, initialState);
     const { toggleTheme } = useContext(ThemeContext);
     const { count } = internalState;
-    const { hello: { counter } } = props;
-    return(
+    const {
+        hello: { counter },
+    } = props;
+    return (
         <>
             <h1>Hook state</h1>
             <span data-testid={'hook-state'}>count: {count}</span>
-            <Button text={'+'} data-testid={'hook-state-increment-btn'} onClick={() => {dispatchState({ type: 'increment' })}}/>
-            <Button text={'-'} data-testid={'hook-state-decrement-btn'} onClick={() => {dispatchState({ type: 'decrement' })}}/>
+            <Button
+                text={'+'}
+                data-testid={'hook-state-increment-btn'}
+                onClick={() => {
+                    dispatchState({ type: 'increment' });
+                }}
+            />
+            <Button
+                text={'-'}
+                data-testid={'hook-state-decrement-btn'}
+                onClick={() => {
+                    dispatchState({ type: 'decrement' });
+                }}
+            />
             <h1>Redux State</h1>
             <span data-testid={'redux-state'}>count: {counter}</span>
-            <Button text={'+'} data-testid={'redux-state-increment-btn'} onClick={() => {props.actions.changeCounter(HelloActionType.increment)}}/>
-            <Button text={'-'} data-testid={'redux-state-decrement-btn'} onClick={() => {props.actions.changeCounter(HelloActionType.decrement)}}/>
-            <br/><Button text={'change theme'} onClick={toggleTheme}/>
+            <Button
+                text={'+'}
+                data-testid={'redux-state-increment-btn'}
+                onClick={() => {
+                    props.actions.changeCounter(HelloActionType.increment);
+                }}
+            />
+            <Button
+                text={'-'}
+                data-testid={'redux-state-decrement-btn'}
+                onClick={() => {
+                    props.actions.changeCounter(HelloActionType.decrement);
+                }}
+            />
+            <br />
+            <Button text={'change theme'} onClick={toggleTheme} />
         </>
     );
 }
@@ -54,26 +81,26 @@ interface ReduxActions {
     changeCounter: (actionType: HelloActionType) => void;
 }
 
-interface Props extends RouteComponentProps{
+interface Props extends RouteComponentProps {
     hello: HelloState;
     actions: ReduxActions;
 }
 
-function mapStateToProps(state: RootState){
+function mapStateToProps(state: RootState) {
     return {
-        hello: state.hello
+        hello: state.hello,
     };
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
     return {
-        actions: bindActionCreators({
-            changeCounter
-        }, dispatch)
+        actions: bindActionCreators(
+            {
+                changeCounter,
+            },
+            dispatch,
+        ),
     };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Hello);
+export default connect(mapStateToProps, mapDispatchToProps)(Hello);

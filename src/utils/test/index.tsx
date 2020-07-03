@@ -1,7 +1,7 @@
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 import { createMemoryHistory, parsePath } from 'history';
 import resolvePathname from 'resolve-pathname';
-import { match as routerMatch} from 'react-router-dom';
+import { match as routerMatch } from 'react-router-dom';
 import { render as rtlRender } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import ThemeProvider from '../../theme/ThemeProvider';
@@ -12,50 +12,53 @@ import reducerInitialState from '../../reducers/initialStates';
 interface RenderOptions {
     initialState?: Partial<RootState>;
     renderOptions?: {
-        [key:string]: any
-    }
+        [key: string]: any;
+    };
 }
 
 function render(ui: React.ReactElement, renderOptions: RenderOptions) {
     const initialState = renderOptions.initialState ? renderOptions.initialState : reducerInitialState;
     const store = configureStore(initialState);
-    function Wrapper( { children }: { children?: ReactNode } ) {
-        return <Provider store={store}>
-            <ThemeProvider>
-                {children}
-            </ThemeProvider>
-        </Provider>;
+    function Wrapper({ children }: { children?: ReactNode }) {
+        return (
+            <Provider store={store}>
+                <ThemeProvider>{children}</ThemeProvider>
+            </Provider>
+        );
     }
     return rtlRender(ui, { wrapper: Wrapper, ...renderOptions.renderOptions });
 }
 
 type MatchParameter<Params> = { [K in keyof Params]?: string };
 
-export const routerTestProps = <Params extends MatchParameter<Params> = {}>
-(path: string, params: Params, extendMatch: Partial<routerMatch<any>> = {}) => {
-    const match: routerMatch<Params> = Object.assign({}, {
-        isExact: false,
-        path,
-        url: generateUrl(path, params),
-        params
-    }, extendMatch);
+export const routerTestProps = <Params extends MatchParameter<Params>>(
+    path: string,
+    params: Params,
+    extendMatch: Partial<routerMatch<any>> = {},
+) => {
+    const match: routerMatch<Params> = Object.assign(
+        {},
+        {
+            isExact: false,
+            path,
+            url: generateUrl(path, params),
+            params,
+        },
+        extendMatch,
+    );
     const history = createMemoryHistory();
     const location = createLocation(match.url);
 
     return { history, location, match };
 };
 
-
-const generateUrl = <Params extends MatchParameter<Params>>
-(path: string, params: Params): string => {
+const generateUrl = <Params extends MatchParameter<Params>>(path: string, params: Params): string => {
     let tempPath = path;
 
     for (const param in params) {
         if (params.hasOwnProperty(param)) {
             const value = params[param];
-            tempPath = tempPath.replace(
-                `:${param}`, value as NonNullable<typeof value>
-            );
+            tempPath = tempPath.replace(`:${param}`, value as NonNullable<typeof value>);
         }
     }
 
@@ -79,8 +82,7 @@ function createLocation(path: any, state?: any, key?: any, currentLocation?: any
         if (location.pathname === undefined) location.pathname = '';
 
         if (location.search) {
-            if (location.search.charAt(0) !== '?')
-                location.search = '?' + location.search;
+            if (location.search.charAt(0) !== '?') location.search = '?' + location.search;
         } else {
             location.search = '';
         }
@@ -91,8 +93,7 @@ function createLocation(path: any, state?: any, key?: any, currentLocation?: any
             location.hash = '';
         }
 
-        if (state !== undefined && location.state === undefined)
-            location.state = state;
+        if (state !== undefined && location.state === undefined) location.state = state;
     }
 
     try {
@@ -101,9 +102,9 @@ function createLocation(path: any, state?: any, key?: any, currentLocation?: any
         if (e instanceof URIError) {
             throw new URIError(
                 'Pathname "' +
-                location.pathname +
-                '" could not be decoded. ' +
-                'This is likely caused by an invalid percent-encoding.'
+                    location.pathname +
+                    '" could not be decoded. ' +
+                    'This is likely caused by an invalid percent-encoding.',
             );
         } else {
             throw e;
@@ -117,10 +118,7 @@ function createLocation(path: any, state?: any, key?: any, currentLocation?: any
         if (!location.pathname) {
             location.pathname = currentLocation.pathname;
         } else if (location.pathname.charAt(0) !== '/') {
-            location.pathname = resolvePathname(
-                location.pathname,
-                currentLocation.pathname
-            );
+            location.pathname = resolvePathname(location.pathname, currentLocation.pathname);
         }
     } else {
         // When there is no prior location and pathname is empty, set it to /
