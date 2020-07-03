@@ -9,14 +9,14 @@ import { Router } from 'react-router-dom';
  */
 
 test('test routes', () => {
-  const history = createMemoryHistory();
-  const { container } = render(
-    <Router history={history}>
-      <RootRoutes />
-    </Router>,
-    {}
-  );
-  expect(container.innerHTML).toMatch('Hook state');
-  history.push('/miss');
-  expect(container.innerHTML).toMatch('Miss');
+    const history = createMemoryHistory();
+    const { container } = render(
+        <Router history={history}>
+            <RootRoutes />
+        </Router>,
+        {},
+    );
+    expect(container.innerHTML).toMatch('Hook state');
+    history.push('/miss');
+    expect(container.innerHTML).toMatch('Miss');
 });

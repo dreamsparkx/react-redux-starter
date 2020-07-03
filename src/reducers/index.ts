@@ -3,12 +3,12 @@ import { HelloState } from '../types/store/hello';
 import { helloReducer } from './hello';
 
 const rootReducer = () =>
-  combineReducers({
-    hello: helloReducer,
-  });
+    combineReducers({
+        hello: helloReducer,
+    });
 
 export interface State {
-  hello: HelloState;
+    hello: HelloState;
 }
 
 export default rootReducer;

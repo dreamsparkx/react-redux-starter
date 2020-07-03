@@ -4,7 +4,7 @@ import { render, screen, fireEvent, routerTestProps } from '../../utils/test';
 
 test('render with redux with default', () => {
     const { history, location, match } = routerTestProps('/', {});
-    render(<Container history={history} location={location} match={match}/>, {});
+    render(<Container history={history} location={location} match={match} />, {});
     expect(screen.getByTestId('hook-state')).toHaveTextContent('count: 0');
     fireEvent.click(screen.getByTestId('hook-state-increment-btn'));
     expect(screen.getByTestId('hook-state')).toHaveTextContent('count: 1');
@@ -19,12 +19,12 @@ test('render with redux with default', () => {
 
 test('render with redux with custom initial state', () => {
     const { history, location, match } = routerTestProps('/', {});
-    render(<Container history={history} location={location} match={match}/>, {
+    render(<Container history={history} location={location} match={match} />, {
         initialState: {
             hello: {
-                counter: 1
-            }
-        }
+                counter: 1,
+            },
+        },
     });
     expect(screen.getByTestId('hook-state')).toHaveTextContent('count: 0');
     fireEvent.click(screen.getByTestId('hook-state-increment-btn'));
