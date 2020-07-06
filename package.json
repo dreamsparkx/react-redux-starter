@@ -12,7 +12,7 @@
     "serve": "serve -s build",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "format": "prettier --write src/**/*.{ts,tsx}",
+    "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "eslintConfig": {
@@ -81,7 +81,7 @@
   },
   "lint-staged": {
     "./src/*.{js,jsx,ts,tsx}": [
-      "prettier --write src/**/*.{ts,tsx}", "eslint --fix"
+      "prettier --write 'src/**/*.{ts,tsx}'", "eslint --fix"
     ]
   }
 }
