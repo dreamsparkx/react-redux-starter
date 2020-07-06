@@ -1,11 +1,18 @@
 import { State } from '../reducers';
-import { Dispatch } from 'redux';
-import { ActionType } from '../types/store/hello';
+import {Action as ReduxAction, ActionCreator, Dispatch} from 'redux';
+import {Action, ActionType} from '../types/store/hello';
+import {ThunkAction} from "redux-thunk";
 
-export function changeCounter(actionType: ActionType) {
-    return function (dispatch: Dispatch, getState: () => State) {
-        return dispatch({
-            type: actionType,
-        });
+const changeCounterAction: ActionCreator<Action> = (actionType: ActionType) => {
+    return {
+        type: actionType
     };
-}
+};
+
+export const changeCounter: ActionCreator<ThunkAction<Action, State, unknown, ReduxAction<string>>> = (
+    actionType: ActionType,
+) => {
+    return (dispatch: Dispatch<Action>, getState: () => State): Action => {
+        return dispatch(changeCounterAction(actionType));
+    };
+};
