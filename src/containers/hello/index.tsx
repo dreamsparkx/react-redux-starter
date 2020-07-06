@@ -1,13 +1,14 @@
 import React, { useReducer, Dispatch as DispatchType, useContext } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
-import { bindActionCreators, Dispatch } from 'redux';
+import {Action as ReduxAction, bindActionCreators, Dispatch} from 'redux';
 import { State as RootState } from '../../reducers';
 import { State, Action } from '../../types/containers/hello';
 import { changeCounter } from '../../actions/helloActions';
-import { HelloState, ActionType as HelloActionType } from '../../types/store/hello';
+import { HelloState, ActionType as HelloActionType, Action as HelloAction } from '../../types/store/hello';
 import Button from '../../components/Button';
 import { ThemeContext } from '../../theme/ThemeProvider';
+import {ThunkAction} from "redux-thunk";
 
 /**
  * @tutorial https://blog.bitsrc.io/writing-your-own-custom-hooks-4fbcf77e112e
@@ -78,7 +79,7 @@ function Hello(props: Props) {
 }
 
 interface ReduxActions {
-    changeCounter: (actionType: HelloActionType) => void;
+    changeCounter: (actionType: HelloActionType) => ThunkAction<HelloAction, RootState, unknown, ReduxAction<string>>;
 }
 
 interface Props extends RouteComponentProps {

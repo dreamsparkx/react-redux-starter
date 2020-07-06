@@ -1,6 +1,6 @@
 export enum ActionType {
-    increment = 'increment',
-    decrement = 'decrement',
+    increment,
+    decrement
 }
 
 export type Action = { type: ActionType.increment } | { type: ActionType.decrement };
