@@ -1,11 +1,11 @@
 import { State } from '../reducers';
-import {Action as ReduxAction, ActionCreator, Dispatch} from 'redux';
-import {Action, ActionType} from '../types/store/hello';
-import {ThunkAction} from "redux-thunk";
+import { Action as ReduxAction, ActionCreator, Dispatch } from 'redux';
+import { Action, ActionType } from '../types/store/hello';
+import { ThunkAction } from 'redux-thunk';
 
 const changeCounterAction: ActionCreator<Action> = (actionType: ActionType) => {
     return {
-        type: actionType
+        type: actionType,
     };
 };
 
