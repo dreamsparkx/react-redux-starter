@@ -29,3 +29,7 @@ Build and run the project
 npm run build
 npm start
 ```
+
+Added an example for websockets. Clone [backend repo] for the websocket to work.
+
+  [backend repo]: <https://github.com/dreamsparkx/node-starter>
