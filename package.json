@@ -64,7 +64,7 @@
     "require-context.macro": "^1.2.2",
     "resolve-pathname": "^3.0.0",
     "serve": "^11.3.2",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "history": "^5.0.0",
