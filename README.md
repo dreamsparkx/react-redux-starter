@@ -32,4 +32,9 @@ npm start
 
 Added an example for websockets. Clone [backend repo] for the websocket to work.
 
+Docker Commands:
+```bash
+docker-compose -f docker-compose.yml up --build -d
+```
+
   [backend repo]: <https://github.com/dreamsparkx/node-starter>
