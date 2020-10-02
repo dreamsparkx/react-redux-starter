@@ -2,7 +2,9 @@ import io, { Socket } from 'socket.io-client';
 let socket: typeof Socket | null = null;
 
 export const initiateSocket = (roomID: string): void => {
-    socket = io('http://localhost:5000');
+    socket = io('/', {
+        path: '/socketio',
+    });
     if (socket && roomID) {
         socket.emit('join', roomID);
     }
