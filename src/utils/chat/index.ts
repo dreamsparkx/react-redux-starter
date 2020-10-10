@@ -2,7 +2,7 @@ import io, { Socket } from 'socket.io-client';
 let socket: typeof Socket | null = null;
 
 export const initiateSocket = (roomID: string): void => {
-    socket = io('/', {
+    socket = io(`${process.env.REACT_APP_API_URL || ''}/`, {
         path: '/socketio',
     });
     if (socket && roomID) {
