@@ -2,6 +2,7 @@ FROM node
 WORKDIR /usr/app
 COPY ./package.json ./
 COPY ./package-lock.json ./
+ENV REACT_APP_API_URL='/'
 RUN npm install
 COPY . .
 CMD ["npm", "run", "start"]
