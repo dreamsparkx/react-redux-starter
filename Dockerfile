@@ -1,6 +1,8 @@
 # build environment
 FROM node AS build
 WORKDIR /usr/app
+ENV PATH /usr/app/node_modules/.bin:$PATH
+ENV REACT_APP_API_URL='/'
 COPY ./package.json ./
 COPY ./package-lock.json ./
 RUN npm install
