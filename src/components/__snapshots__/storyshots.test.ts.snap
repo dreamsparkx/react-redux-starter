@@ -2,7 +2,7 @@
 
 exports[`Storyshots Button default 1`] = `
 <button
-  className="sc-bdnylx hRGtB"
+  className="sc-bdfBwQ fVZaix"
   onClick={[Function]}
 >
   button label
@@ -11,7 +11,7 @@ exports[`Storyshots Button default 1`] = `
 
 exports[`Storyshots Button different 1`] = `
 <button
-  className="sc-bdnylx hRGtB"
+  className="sc-bdfBwQ fVZaix"
   onClick={[Function]}
 >
   button-label-1
