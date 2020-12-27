@@ -20,7 +20,8 @@ git clone https://github.com/dreamsparkx/react-redux-starter <project_name>
 Install dependencies
 ```
 cd <project_name>
-npm install
+npm install or
+npm install --legacy-peer-deps
 ```
 
 Build and run the project
