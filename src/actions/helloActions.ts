@@ -12,6 +12,7 @@ const changeCounterAction: ActionCreator<Action> = (actionType: ActionType) => {
 export const changeCounter: ActionCreator<ThunkAction<Action, State, unknown, ReduxAction<string>>> = (
     actionType: ActionType,
 ) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     return (dispatch: Dispatch<Action>, getState: () => State): Action => {
         return dispatch(changeCounterAction(actionType));
     };

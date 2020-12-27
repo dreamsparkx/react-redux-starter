@@ -16,7 +16,7 @@ export const disconnectSocket = (): void => {
     }
 };
 
-export const subscribeToChat = (cb: CallBackType) => {
+export const subscribeToChat = (cb: CallBackType): void => {
     if (!socket) {
         return cb(true);
     }

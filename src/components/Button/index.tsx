@@ -15,7 +15,8 @@ export default styled(Button)`
     background-color: ${({ theme }) => theme.background};
 `;
 
-interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+export interface Props
+    extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     text: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
