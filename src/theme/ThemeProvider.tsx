@@ -1,4 +1,4 @@
-import React, { useState, createContext, ReactNode } from 'react';
+import React, { useState, createContext } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { ThemeType } from '../types/theme';
 import { lightTheme, darkTheme } from './index';
@@ -16,7 +16,8 @@ export const ThemeContext = createContext({
     },
 });
 
-export default function ThemeProvider(props: Props) {
+const ThemeProvider: React.FunctionComponent = (props) => {
+    const { children } = props;
     const currThemeName: ThemeType = (localStorage.getItem('theme') as ThemeType) || 'light';
     const [_theme, _setTheme] = useState<ThemeType>(currThemeName);
     const toggleTheme = () => {
@@ -37,12 +38,10 @@ export default function ThemeProvider(props: Props) {
         >
             <StyledThemeProvider theme={_theme === 'light' ? lightTheme : darkTheme}>
                 <GlobalStyles />
-                {props.children}
+                {children}
             </StyledThemeProvider>
         </ThemeContext.Provider>
     );
-}
+};
 
-interface Props {
-    children: ReactNode;
-}
+export default ThemeProvider;
