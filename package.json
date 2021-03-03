@@ -92,8 +92,9 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "asd",
-      "asdqwe"
+      "npm run format",
+      "npm run lint",
+      "npm run asdqweqasd"
     ]
   },
   "config": {
